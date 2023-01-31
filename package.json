@@ -1,8 +1,8 @@
 {
-  "name": "wallet-adapter-plugin-template",
+  "name": "@nightlylabs/aptos-wallet-adapter-plugin",
   "version": "0.1.0",
-  "description": "Petra plugin to use with Aptos Wallet Adapter",
-  "author": "Petra Aptos",
+  "description": "Nightly plugin to use with Aptos Wallet Adapter",
+  "author": "NB 😈",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -18,7 +18,9 @@
   },
   "dependencies": {
     "@aptos-labs/wallet-adapter-core": "^0.2.2",
-    "aptos": "^1.4.0"
+    "aptos": "^1.4.0",
+    "bs58": "^5.0.0",
+    "js-sha3": "^0.8.0"
   },
   "devDependencies": {
     "@types/jest": "^29.2.3",
