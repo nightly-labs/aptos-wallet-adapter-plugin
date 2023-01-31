@@ -36,11 +36,11 @@ interface NightlyWindow extends Window {
 
 declare const window: NightlyWindow // CHANGE AptosWindow
 
-export const AptosWalletName = 'Aptos' as WalletName<'Aptos'> // CHANGE AptosWalletName, CHANGE "Aptos"
+export const NightlyWalletName = 'Nightly' as WalletName<'Nightly'> // CHANGE AptosWalletName, CHANGE "Aptos"
 
 // CHANGE AptosWallet
-export class AptosWallet implements AdapterPlugin {
-  readonly name = AptosWalletName // CHANGE AptosWalletName (can have capitalization)
+export class NightlyWallet implements AdapterPlugin {
+  readonly name = NightlyWalletName // CHANGE AptosWalletName (can have capitalization)
   readonly url = // CHANGE url value
     'https://chrome.google.com/webstore/detail/nightly/fiikommddbeccaoicoejoniammnalkfa'
   readonly icon = nightlyIcon
@@ -57,7 +57,7 @@ export class AptosWallet implements AdapterPlugin {
   async connect(): Promise<AccountInfo> {
     try {
       const accountInfo = await this.provider?.connect()
-      if (!accountInfo) throw `${AptosWalletName} Address Info Error`
+      if (!accountInfo) throw `${NightlyWalletName} Address Info Error`
       return {
         address: accountInfo.address(),
         publicKey: accountInfo.asString(),
@@ -69,7 +69,7 @@ export class AptosWallet implements AdapterPlugin {
 
   async account(): Promise<AccountInfo> {
     const response = await this.provider?.publicKey
-    if (!response) throw `${AptosWalletName} Account Error`
+    if (!response) throw `${NightlyWalletName} Account Error`
     return {
       address: response.address(),
       publicKey: response.asString(),
@@ -90,7 +90,7 @@ export class AptosWallet implements AdapterPlugin {
   ): Promise<{ hash: Types.HexEncodedBytes }> {
     try {
       const response = await this.provider?.signTransaction(transaction, true)
-      if (response) throw `${AptosWalletName} signAndSubmitTransaction Error`
+      if (response) throw `${NightlyWalletName} signAndSubmitTransaction Error`
 
       return { hash: (response as unknown as Uint8Array).toString() }
     } catch (error: any) {
@@ -102,7 +102,7 @@ export class AptosWallet implements AdapterPlugin {
   async signMessage(message: SignMessagePayload): Promise<SignMessageResponse> {
     try {
       if (typeof message !== 'object' || !message.nonce) {
-        ;`${AptosWalletName} Invalid signMessage Payload`
+        ;`${NightlyWalletName} Invalid signMessage Payload`
       }
       // TODO: use nonce and prefix
       const response = await this.provider?.signMessage(message.message)
@@ -115,7 +115,7 @@ export class AptosWallet implements AdapterPlugin {
           prefix: 'APTOS',
         }
       } else {
-        throw `${AptosWalletName} Sign Message failed`
+        throw `${NightlyWalletName} Sign Message failed`
       }
     } catch (error: any) {
       const errMsg = error.message
@@ -126,7 +126,7 @@ export class AptosWallet implements AdapterPlugin {
   async network(): Promise<NetworkInfo> {
     try {
       const response = await this.provider?.network()
-      if (!response) throw `${AptosWalletName} Network Error`
+      if (!response) throw `${NightlyWalletName} Network Error`
       return {
         name: response.network.toLocaleLowerCase() as NetworkName,
       }
@@ -162,12 +162,12 @@ export class AptosWallet implements AdapterPlugin {
       }
       if (this.provider) {
         this.provider.onAccountChange = (pubKey) => {
-          if (!pubKey) throw `${AptosWalletName} onAccountChange Error`
+          if (!pubKey) throw `${NightlyWalletName} onAccountChange Error`
           const publicKey = AptosPublicKey.fromBase58(pubKey)
           handleAccountChange({ address: publicKey.address(), publicKey: publicKey.asString() })
         }
       } else {
-        throw `${AptosWalletName} onAccountChange Error`
+        throw `${NightlyWalletName} onAccountChange Error`
       }
     } catch (error: any) {
       console.log(error)
