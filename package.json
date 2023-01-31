@@ -14,7 +14,8 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
-    "test": "jest"
+    "test": "jest",
+    "publish": "npm publish --access public"
   },
   "dependencies": {
     "@aptos-labs/wallet-adapter-core": "^0.2.2",
