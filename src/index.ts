@@ -49,7 +49,7 @@ export class NightlyWallet implements AdapterPlugin {
   // such as window.aptosWallet and wallet name is Aptos.
   // If your wallet name prop is different than the window property name use the window property name here and comment out line 37
 
-  readonly providerName = 'nightlyWallet'
+  readonly providerName = 'nightly'
 
   provider: AptosNightly | undefined =
     typeof window !== 'undefined' ? window.nightly?.aptos : undefined // CHANGE window.aptos
